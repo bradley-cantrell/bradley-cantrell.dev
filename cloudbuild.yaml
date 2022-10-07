@@ -1,6 +1,7 @@
 steps:
-#Artifacts
-- artifacts:
-  objects:
-    location: gs://bradley-cantrell.dev
-    paths: [index.html,cover.css]
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run' , 'build']
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ["-m", "rsync", "-r", "-c", "-d", "./dist", "gs://bradley-cantrell-dev"]
